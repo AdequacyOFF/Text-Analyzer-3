@@ -2,6 +2,7 @@ import { useState } from "react";
 import '../Pages_css/Url.css';
 import OutputText from "./OutPutText.jsx";
 import { useLocation } from 'react-router-dom';
+import '../Pages_css/OutPutText.css';
 
 
 function Url() {
@@ -40,6 +41,15 @@ function Url() {
     }
   };
 
+  const handleSave = () => {
+    fetch('http://127.0.0.1:8080/outputText/articleSave', {
+      method: 'GET',
+      headers: {
+        'publishArticle': true,
+      },
+    })
+  };
+
   
 
 
@@ -58,7 +68,13 @@ function Url() {
         <div className='answer-url-frame'>
           {responseData.length!=0 ? <OutputText inputArray={responseData}/> : null}
         </div>
-      </div>  
+      </div>
+      <div>
+        <button className='Save_btn' type="button" onClick={handleSave}>
+          <img src="src/Images/SaveButton.png" alt="Save" />
+        </button>
+      </div>
+
     </div>
     
   );

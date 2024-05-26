@@ -38,14 +38,7 @@ function OutputText({ inputArray }) {
     console.log(array);
   };
 
-  const handleSave = () => {
-    fetch('http://127.0.0.1:8080/outputText/articlePublish', {
-      method: 'GET',
-      headers: {
-        'publishArticle': true,
-      },
-    })
-  };
+
 
 
   console.log(JSON.stringify({ inputValue }));
@@ -92,14 +85,6 @@ function OutputText({ inputArray }) {
       </div>
       <div className="TextStyleConclusion">
         {(array[array.length - 1] != undefined) ? <StyleConclusions array={array[array.length - 1]} /> : null}
-      </div>
-      <div>
-        {(array != array.length) ? 
-          (<button className='Save_btn' type="button" onClick={handleSave}>
-            <img src="src/Images/SaveButton.png" alt="Save" />
-          </button>)
-          : null
-        }
       </div>
     </div>
   );
