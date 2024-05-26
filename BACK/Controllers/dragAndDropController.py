@@ -23,8 +23,9 @@ def file_process(uploadFolder, allowedExtensions, classifier):
         if file and allowed_file(file.filename, allowedExtensions):
             filename = secure_filename(file.filename)
             file.save(os.path.join(uploadFolder, filename))
-
-            filepath = (uploadFolder +"\\"+ filename).replace('/','\\')
+            
+            # filepath = (uploadFolder +"\\"+ filename).replace('/','\\')
+            filepath = (uploadFolder +"/"+ filename) #это закоментить
             fileExtension = file.filename.rsplit('.', 1)[1]
             print (filepath)
             match fileExtension:
