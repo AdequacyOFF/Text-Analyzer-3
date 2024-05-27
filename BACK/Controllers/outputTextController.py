@@ -11,10 +11,25 @@ def article_update():
     return Response('Article has been updated successfully', status=200)
 
 def article_edit(classifier):
-    newSentence = json.loads(classifier.summary(request.json.get('inputValue', None)))
-    processedArticle[request.headers.get('indexToChange', type = int)] = newSentence[0]
-    answer = json.dumps(processedArticle, ensure_ascii=False, sort_keys=False)
-    return Response(answer, content_type="application/json")
+    indexToChange = request.headers.get('indexToChange', type = int)
+    newSentenceText = request.json.get('inputValue', None)
+    processedArticleText = ""
+    for sentence in processedArticle[:indexToChange]:
+        print ("sentence:\n")
+        print(sentence)
+        processedArticleText += sentence['text']
+
+    processedArticleText += newSentenceText
+
+    for sentence in processedArticle[indexToChange + 1:len(processedArticle)-2]:
+        print ("sentence:\n")
+        print(sentence)
+        processedArticleText += sentence['text']
+
+    # newSentence = json.loads(classifier.summary(request.json.get('inputValue', None)))
+    # processedArticle[request.headers.get('indexToChange', type = int)] = newSentence[0]
+    # answer = json.dumps(classifier.summary(processedArticleText), ensure_ascii=False, sort_keys=False)
+    return Response(classifier.summary(processedArticleText), content_type="application/json")
 
 def article_publish(bot):
     processedArticleText = ""

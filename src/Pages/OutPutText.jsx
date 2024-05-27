@@ -1,7 +1,7 @@
 import React from "react";
 import { Mychart } from "./Chart.jsx";
 import { TotalChart } from "./TotalChart.jsx";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { TextStyle } from "./TextStyle.jsx";
 import { StyleConclusions } from "./TextStyleConclusion.jsx";
 import '../Pages_css/OutPutText.css';
@@ -10,7 +10,12 @@ import '../Pages_css/TextStyleConclusion.css';
 function OutputText({ inputArray, articleLink = "https://baza.znanierussia.ru/mediawiki/index.php/%D0%BC%D0%BE%D1%8F-%D1%81%D1%82%D0%B0%D1%82%D1%8C%D1%8F" }) {
   console.log(inputArray);
   const [inputValue, setInputValue] = useState("");
+  
   const [array, setArray] = useState(inputArray);
+
+  useEffect(() => {
+    setArray(inputArray);
+  }, [inputArray]);
 
   const handleChange = (event) => {
     setInputValue(event.target.value);
